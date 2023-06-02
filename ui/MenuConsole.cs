@@ -51,7 +51,7 @@ namespace SettlersSharp.UI
 
             this.Print(1, 3, Menu.Text);
 
-            var theme = new ButtonTheme();
+            var theme = new ButtonTheme(); // new ColoredButtonTheme();
             theme.ShowEnds = false;
 
             var y = 5;
@@ -74,14 +74,13 @@ namespace SettlersSharp.UI
         {
             var text = prefix.ToString() + ": " + option.Text;
 
-            var button = new Button(text.Length, 1)
-                {
-                    Text = text,
-                    Position = new Point(1, y)
-                };
-                button.Click += (s, a) => option.OnSelect(Game);
-                button.Theme = theme;
-                Controls.Add(button);
+            var button = new Button(text.Length, 1);
+            button.Text = text;
+            // button.AlternativeText.IgnoreBackground = true;
+            button.Position = new Point(1, y);
+            button.Click += (s, a) => option.OnSelect(Game);
+            button.Theme = theme;
+            Controls.Add(button);
         }
     }
 }

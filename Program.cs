@@ -4,6 +4,7 @@ using SadRogue.Primitives;
 using Console = SadConsole.Console;
 using SettlersSharp.UI;
 using SettlersSharp.Engine;
+using SadConsole.UI.Controls;
 
 namespace SettlersSharp
 {
@@ -11,6 +12,8 @@ namespace SettlersSharp
     {
         private static void Main(string[] args)
         {
+            SadConsole.UI.Themes.Library.Default.SetControlTheme(typeof(ColoredButton), new ColoredButtonTheme());
+
             var SCREEN_WIDTH = 80;
             var SCREEN_HEIGHT = 25;
 
@@ -41,9 +44,9 @@ namespace SettlersSharp
 
             console.Menu = MainMenus.MainMenu();
             console.Menu.NumberedOptions.Add(
-                new Option("settlers", 
+                new Option("Settlers", 
                     Navigation.AddMenu(
-                        GameObject.MultipageObjectMenu("Settlers", "choose a settler", (game) => game.Settlers, 
+                        GameObject.MultipageObjectMenu("Settlers", $"choose a {game.Settlers[0].Display(Color.LightGray)}", (game) => game.Settlers, 
                             (settler, game) => {
                                 return new Option(settler.GetName(), Navigation.Back());
                             }

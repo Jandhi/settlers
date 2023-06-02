@@ -3,13 +3,20 @@ using SettlersSharp.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SettlersSharp.Utils;
 
 namespace SettlersSharp.Engine
 {
-    public interface GameObject
+    public abstract class GameObject
     {
-        public string GetName();
-        public Color GetColor();
+        public abstract string GetName();
+        public abstract Color GetColor();
+
+        public string Display(Color Default = default) {
+            var myColor = ColorUtils.ToForegroundTag(GetColor());
+            var defaultColor = ColorUtils.ToForegroundTag(Default);
+            return $"{myColor}{GetName()}{defaultColor}";
+        }
 
         public static Func<Game, Menu> ObjectMenu<T>(string title, string text, Func<Game, List<T>> contentGetter, Func<T, Game, Option> optionGenerator, bool canGoBack = true) where T : GameObject {
             return (game) => new Menu(

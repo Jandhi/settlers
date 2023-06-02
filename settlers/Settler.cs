@@ -7,12 +7,12 @@ namespace SettlersSharp.Settlers
     {
         public string Name;
 
-        public Color GetColor()
+        public override Color GetColor()
         {
             return Color.White;
         }
 
-        public string GetName()
+        public override string GetName()
         {
             return Name;
         }
